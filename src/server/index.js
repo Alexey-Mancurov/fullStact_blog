@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
+const postRouter = require('./routes/post')
 const keys = require('./keys')
 
 const port = process.env.PORT || 5000
@@ -11,6 +12,7 @@ mongoose.connect(keys.mongoURI)
     .catch((err) => console.error(err))
 
 const server = express()
+server.use('/api/post', postRouter)
 server.use(express.static(clientPath))
 
 server.listen(port, () => {
